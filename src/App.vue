@@ -1,53 +1,39 @@
 <script>
-import axios from 'axios';
 
-export default {
+export default {}
 
-    data() {
-        return {
-            base_url: 'http://127.0.0.1:8000/',
-            projects_API: 'api/projects',
-            projects: [],
-            loading: true,
-            // error: '',
-        };
-    },
-
-    mounted() {
-        axios
-            .get(`${this.base_url + this.projects_API}`)
-            .then((response) => {
-                this.projects = response.data.projects;
-                this.loading = false;
-                console.log(this.projects);
-            })
-            .catch(error => {
-                console.error(error);
-                this.error = error.message;
-            })
-
-    },
-}
 </script>
 
 <template>
-    <section class="projects">
-        <div class="container">
-            <h1>My Projects</h1>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                <div v-for="project in projects">
-                    <div class="card">
-                        <img class="card-img-top" :src="base_url + '/storage/' + project.project_image"
-                            :alt="project.title">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ project.title }}</h4>
-                            <p class="card-text">{{ project.description }}</p>
-                        </div>
-                    </div>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container">
+                <router-link class="navbar-brand" :to="{ 'name': 'home' }">Navbar</router-link>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <router-link class="nav-link active" :to="{ 'name': 'home' }" aria-current="page">Home <span
+                                    class="visually-hidden">(current)</span></router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" :to="{ 'name': 'about' }">About</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" :to="{ 'name': 'contacts' }">Contacts</router-link>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
+
+    </header>
+    <router-view></router-view>
 </template>
 
 <style lang="scss">
