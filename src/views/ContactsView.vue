@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-  <AppBanner title="Contacts Page"></AppBanner>
+  <AppBanner title="Contacts"></AppBanner>
 </template>
 
 <style lang="scss" scoped></style>
