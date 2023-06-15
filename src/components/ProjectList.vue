@@ -11,6 +11,7 @@ export default {
             loading: true,
             links: '',
             error: '',
+            max_text_length: 100,
         };
     },
     methods: {
@@ -39,6 +40,14 @@ export default {
         nextPage(path) {
             // console.log(path);
             this.getProjects(path);
+        },
+        truncateText(text) {
+            if (text.length > this.max_text_length) {
+                // console.log(text.slice(0, 100));
+                return text.slice(0, this.max_text_length) + '...';
+            }
+            // console.log(text);
+            return text
         }
     },
     mounted() {
@@ -58,7 +67,7 @@ export default {
                             :alt="project.title">
                         <div class="card-body">
                             <h4 class="card-title">{{ project.title }}</h4>
-                            <p class="card-text">{{ project.description }}</p>
+                            <p class="card-text">{{ truncateText(project.description) }}</p>
                             <router-link :to="{ name: 'single-project', params: { slug: project.slug } }"
                                 class="nav-link">Read more</router-link>
                         </div>
