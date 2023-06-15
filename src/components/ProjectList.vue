@@ -63,8 +63,7 @@ export default {
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 <div v-for="project in projects.data">
                     <div class="card h-100">
-                        <img class="card-img-top" :src="base_url + '/storage/' + project.project_image"
-                            :alt="project.title">
+                        <img class="card-img-top" :src="getImageFromPath(project.project_image)" :alt="project.title">
                         <div class="card-body">
                             <h4 class="card-title">{{ project.title }}</h4>
                             <p class="card-text">{{ truncateText(project.description) }}</p>
