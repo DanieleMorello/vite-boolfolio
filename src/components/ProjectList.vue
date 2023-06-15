@@ -9,22 +9,40 @@ export default {
             projects_API: 'api/projects',
             projects: [],
             loading: true,
-            // error: '',
+            links: '',
+            error: '',
         };
     },
+    methods: {
+        getProjects(url) {
 
+            axios
+                .get(url)
+                .then((response) => {
+                    this.projects = response.data.projects;
+                    this.loading = false;
+                    console.log(this.projects);
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.error = error.message;
+                })
+        },
+        getImageFromPath(path) {
+            // console.log(this.base_url + 'storage/' + path);
+            return this.base_url + 'storage/' + path;
+        },
+        prevPage(path) {
+            // console.log(path);
+            this.getProjects(path);
+        },
+        nextPage(path) {
+            // console.log(path);
+            this.getProjects(path);
+        }
+    },
     mounted() {
-        axios
-            .get(`${this.base_url + this.projects_API}`)
-            .then((response) => {
-                this.projects = response.data.projects;
-                this.loading = false;
-                console.log(this.projects);
-            })
-            .catch(error => {
-                console.error(error);
-                this.error = error.message;
-            })
+        this.getProjects(`${this.base_url + this.projects_API}`)
     },
 }
 </script>
@@ -34,7 +52,7 @@ export default {
         <div class="container">
             <h1>My Projects</h1>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                <div v-for="project in projects">
+                <div v-for="project in projects.data">
                     <div class="card h-100">
                         <img class="card-img-top" :src="base_url + '/storage/' + project.project_image"
                             :alt="project.title">
@@ -44,11 +62,44 @@ export default {
                             <router-link :to="{ name: 'single-project', params: { slug: project.slug } }"
                                 class="nav-link">Read more</router-link>
                         </div>
+                        <div class="card-footer">
+                            <span class="badge bg-primary">{{ project.id }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container mt-4" v-if="projects">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <button class="page-link" href="#" aria-label="Previous" v-if="projects.prev_page_url"
+                            @click="prevPage(projects.prev_page_url)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </button>
+                    </li>
+                    <!-- Todo -->
+                    <!-- <li class="page-item active" aria-current="page">
+                        <router-link class="page-link" :to="{ name: 'per_page', params: 1 }">1</router-link>
+                    </li>
+                    <li class="page-item">
+                        <router-link class="page-link" :to="{ name: 'per_page', params: 2 }">2</router-link>
+                    </li>
+                    <li class="page-item">
+                        <router-link class="page-link" :to="{ name: 'per_page', params: 3 }">3</router-link>
+                    </li> -->
+                    <li class="page-item">
+                        <button class="page-link" href="#" aria-label="Next" v-if="projects.next_page_url"
+                            @click="nextPage(projects.next_page_url)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
     </section>
+
 
     <div v-else>
         <section class="loading">
