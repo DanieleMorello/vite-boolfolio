@@ -1,17 +1,16 @@
 <script>
 import AppBanner from '../components/AppBanner.vue';
-import PostList from '../components/ProjectList.vue';
+import ProjectList from '../components/ProjectList.vue';
 
 export default {
   name: "HomeView",
-  components: { AppBanner },
-  components: { PostList }
+  components: { AppBanner, ProjectList },
 }
 </script>
 
 <template>
   <AppBanner title="Home"></AppBanner>
-  <PostList></PostList>
+  <ProjectList></ProjectList>
 </template>
 
 <style lang="scss" scoped></style>

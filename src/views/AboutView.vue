@@ -1,10 +1,10 @@
 <script>
 import AppBanner from '../components/AppBanner.vue';
-import PostList from '../components/ProjectList.vue';
+import ProjectList from '../components/ProjectList.vue';
 
 export default {
   name: "AboutView",
-  components: { AppBanner, PostList }
+  components: { AppBanner, ProjectList }
 }
 </script>
 
