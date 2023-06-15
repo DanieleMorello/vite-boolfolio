@@ -41,18 +41,21 @@ export default {
                         <div class="card-body">
                             <h4 class="card-title">{{ project.title }}</h4>
                             <p class="card-text">{{ project.description }}</p>
+                            <router-link :to="{ name: 'single-project', params: { slug: project.slug } }"
+                                class="nav-link">Read more</router-link>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <div v-else>
         <section class="loading">
             <div class="row">
                 <div class="col">
                     <div class="card" aria-hidden="true">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="..." class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title placeholder-glow">
                                 <span class="placeholder col-6"></span>
@@ -71,7 +74,7 @@ export default {
 
                 <div class="col">
                     <div class="card" aria-hidden="true">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="..." class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title placeholder-glow">
                                 <span class="placeholder col-6"></span>
@@ -89,7 +92,7 @@ export default {
                 </div>
                 <div class="col">
                     <div class="card" aria-hidden="true">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="..." class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title placeholder-glow">
                                 <span class="placeholder col-6"></span>
@@ -107,7 +110,7 @@ export default {
                 </div>
                 <div class="col">
                     <div class="card" aria-hidden="true">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="..." class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title placeholder-glow">
                                 <span class="placeholder col-6"></span>
@@ -125,7 +128,7 @@ export default {
                 </div>
                 <div class="col">
                     <div class="card" aria-hidden="true">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="..." class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title placeholder-glow">
                                 <span class="placeholder col-6"></span>
